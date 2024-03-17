@@ -22,8 +22,10 @@ export class RegisterComponent {
     password: new FormControl(''),
     name: new FormControl('')
   });
+  erroMessage: string = '';
 
   constructor(private router: Router, private dataSrv: DataService, private registerSrv: RegisterService) {
+    localStorage.removeItem('message');
     this.dataSrv.setGlobalData({'loggedInUserName': 'Guest'});
   }
 
@@ -31,9 +33,10 @@ export class RegisterComponent {
     this.registerSrv.register(this.registerForm.value).
       subscribe((res: any) => {
         if(res?.status === 'SUCCESS') {
+          localStorage.setItem('message', `${this.registerForm.value.name} user registed successfully!`);
           this.router.navigate(['/login']);
         } else {
-          // this.erroMessage = 'Invalid credential!';
+          this.erroMessage = 'Issue occurred !';
         }
       });
   }

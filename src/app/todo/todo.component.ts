@@ -102,6 +102,11 @@ export class TodoComponent implements OnInit {
   openForm(id: number | null) {
     this.isFormOpen = true;
     if(id) {
+      this.todoList.forEach((item: any) => {
+        if(item.id === id) {
+          this.todoForm.controls['content'].setValue(item.content);
+        }
+      })
       this.todoId = id;
     } else {
       this.todoId = null;

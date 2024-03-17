@@ -1,6 +1,6 @@
 <div class="app">
   <div class="example-button-container home-button">
-    <a href="/todo" mat-fab><mat-icon>home</mat-icon></a>
+    <a routerLink="/todo" mat-fab><mat-icon>home</mat-icon></a>
   </div>
   <div class="login-button">Welcome {{loggedInUserName}}.   <a mat-raised-button routerLink="/login" *ngIf="loggedInUserName == 'Guest'">Login</a><a mat-raised-button routerLink="/register" *ngIf="loggedInUserName == 'Guest'">Register</a><a mat-raised-button *ngIf="loggedInUserName != 'Guest'" (click)="logout()">Logout</a></div>
   

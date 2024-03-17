@@ -1,5 +1,21 @@
 <h1>Todo App</h1>
 <div class="blue-text">{{message}}</div>
+
+<div *ngIf="isFormOpen">
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <h3 *ngIf="!todoId">Add Todo</h3>
+    <h3 *ngIf="todoId">Update Todo</h3>
+    <div>
+    <mat-form-field>
+      <mat-label>Todo</mat-label>
+      <input matInput formControlName="content" required>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button color="primary">Save</button>
+  </div>
+  </form>
+  </div>
 <div class="add-new-align-right"><a *ngIf="isLoggedIn" mat-raised-button (click)="openForm(null)">Add New Todo Item</a></div>
 <table mat-table [dataSource]="todoList" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
@@ -25,18 +41,3 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<div *ngIf="isFormOpen">
-<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-  <h3 *ngIf="!todoId">Add Todo</h3>
-  <h3 *ngIf="todoId">Update Todo</h3>
-  <div>
-  <mat-form-field>
-    <mat-label>Todo</mat-label>
-    <input matInput formControlName="content">
-  </mat-form-field>
-</div>
-<div>
-  <button mat-raised-button color="primary">Save</button>
-</div>
-</form>
-</div>

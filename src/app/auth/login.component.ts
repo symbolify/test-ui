@@ -22,11 +22,16 @@ export class LoginComponent {
     email: new FormControl(''),
     password: new FormControl(''),
   });
-  erroMessage: string = '';
+  errorMessage: string = '';
   gData: object = {};
 
   constructor(private loginSrv: LoginService, private router: Router, private dataSrv: DataService) {
     localStorage.removeItem('loggedInUserName');
+    const tmpMsg = localStorage.getItem('message');
+    if(tmpMsg) {
+      this.errorMessage = tmpMsg;
+    }
+    localStorage.removeItem('message');
     this.dataSrv.globalDataObser.subscribe((data: object) => {
       this.gData = data;
     });
@@ -36,11 +41,10 @@ export class LoginComponent {
     this.loginSrv.login(this.loginForm.value).
       subscribe((res: any) => {
         if(res?.status === 'SUCCESS') {
-          // localStorage.setItem('loggedInUserName', res.data.name);
           this.dataSrv.setGlobalData({...this.gData, ...{'loggedInUserName': res.data.name}});
           this.router.navigate(['/todo']);
         } else {
-          this.erroMessage = 'Invalid credential!';
+          this.errorMessage = 'Invalid credential!';
         }
       });
   }
