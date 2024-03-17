@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatButtonModule, MatMenuModule, MatIconModule, CommonModule],
+  imports: [RouterOutlet, MatButtonModule, MatMenuModule, MatIconModule, CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -38,7 +38,7 @@ export class AppComponent {
   }
 
   logout() {
-    this.dataSrv.setGlobalData({'loggedInUserName': 'Guest'})
+    this.dataSrv.setGlobalData({'loggedInUserName': 'Guest'});
     localStorage.removeItem('loggedInUserName');
     this.loggedInUserName = 'Guest';
     this.router.navigate(['/']);
