@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-todo',
@@ -26,15 +27,26 @@ export class TodoComponent implements OnInit {
     content: new FormControl('')
   });
 
-  constructor(private todoSrv: TodoService){
+  constructor(private todoSrv: TodoService, private dataSrv: DataService){
     this.todoList = [];
     const loggedUserLS = localStorage.getItem('loggedInUserName');
-    if(loggedUserLS) {
+    if(loggedUserLS !== 'Guest') {
       this.isLoggedIn = true;
     }
   }
 
   ngOnInit() {
+    this.dataSrv.globalDataObser.subscribe((data: any) => {
+      for(let item in data) {
+        if(item === 'loggedInUserName') {
+          localStorage.setItem('loggedInUserName', data[item]);
+          this.isLoggedIn = false;
+          if(data[item] !== 'Guest') {
+            this.isLoggedIn = true;
+          }
+        }
+      }
+    });
     this.getAllTodos();
   }
 

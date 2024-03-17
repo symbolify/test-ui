@@ -2,8 +2,7 @@
   <div class="example-button-container home-button">
     <a href="/todo" mat-fab><mat-icon>home</mat-icon></a>
   </div>
-  <!-- <div class="home-button"><a mat-raised-button href="/todo">Home</a></div> -->
-  <div class="login-button">Welcome {{loggedInUserName}}.   <a mat-raised-button href="/login">Login</a></div>
+  <div class="login-button">Welcome {{loggedInUserName}}.   <a mat-raised-button href="/login" *ngIf="loggedInUserName == 'Guest'">Login</a><a mat-raised-button *ngIf="loggedInUserName != 'Guest'" (click)="logout()">Logout</a></div>
   
   <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button>
   <mat-menu #menu="matMenu">

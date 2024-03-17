@@ -9,13 +9,11 @@ export class DataService {
   globalDataObser = this.globalData.asObservable();
 
   setGlobalData(param: object) {
-    console.log('***abc', param);
     this.globalData.next(param);
   }
 
   getGlobalData(key: string) {
     this.globalDataObser.subscribe((data: any) => {
-      console.log('### ', data, key);
       for(let item in data) {
         console.log(item,key);
         if(item === key) {

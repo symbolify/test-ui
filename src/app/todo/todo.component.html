@@ -18,7 +18,7 @@
   </ng-container>
 
   <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <th mat-header-cell *matHeaderCellDef> <div *ngIf="isLoggedIn">Action</div> </th>
     <td mat-cell *matCellDef="let element"> <div *ngIf="isLoggedIn"><a (click)="openForm(element.id)" class="link">edit</a> | <a (click)="deleteTodoItem(element.id)" class="link">delete</a></div> </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
