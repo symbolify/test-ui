@@ -1,9 +1,7 @@
-
-
-
-
-
-
+## API path update
+src\environments\environment.development.ts
+C:\Users\asish\code\test\t-pro\ui\src\environments\environment.ts
+Variable name: `apiUrl`
 
 ## Command to Build angular application
 docker build -t test-ui .
